@@ -1,8 +1,8 @@
 (function() {
     function AlbumCtrl() {
-        // this.albumData = angular.copy(albumGrey);
-
-
+        var albumData = angular.copy(albumGrey);
+        console.log(albumData);
+        this.albumData = albumData;
     }
 
     angular
