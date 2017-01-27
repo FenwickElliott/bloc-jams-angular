@@ -1,41 +1,53 @@
 (function() {
-    function SongPlayer() {
-        var SongPlayer = {};
+  function SongPlayer() {
 
-        var currentSong = null;
-        var currentBuzzObject = null;
+    var SongPlayer = {};
+    var currentSong = null;
+    var currentBuzzObject = null;
 
-        SongPlayer.play = function(song){
-          if(currentSong !==song){
-            if(currentBuzzObject){
-              currentBuzzObject.sopt();
-              currentSong.playing = null;
-            }
-            currentBuzzObject = new buzz.sound(song.audioUrl, {
-              formats: ['mp3'],
-              preload: true
-            });
+    /**
+    * @function setSong
+    * @desc Stops currently playing song and loads new audio file as currentBuzzObject
+    * @param {Object} song
+    */
+    var setSong = function(song){
+      if(currentBuzzObject){
+        currentBuzzObject.stop();
+        currentSong.Playing = null;
+      }
 
-            currentSong = song;
+      currentBuzzObject = new buzz.sound(song.audioUrl,{
+        formats: ['mp3'],
+        preload: true
+      });
 
-          currentBuzzObject.play();
-          song.playing = true;
-        } else if (currentSong === song){
-            if (currentBuzzObject.isPaused()){
-              currentBuzzObject.play();
-            }
-        }
-      };
-
-      SongPlayer.pause = function(song){
-        currentBuzzObject.pause();
-        song.playing = false;
-      };
-
-      return SongPlayer;
+      currentSong = song;
     }
 
-    angular
-        .module('blocJams')
-        .factory('SongPlayer', SongPlayer);
+    SongPlayer.play = function(song){
+
+      if(currentSong !==song){
+        setSong(song);
+        currentBuzzObject.play();
+        song.playing = true;
+
+      } else if (currentSong === song){
+          if (currentBuzzObject.isPaused()){
+            currentBuzzObject.play();
+          }
+      }
+    };
+
+    SongPlayer.pause = function(song){
+
+      currentBuzzObject.pause();
+      song.playing = false;
+    };
+
+    return SongPlayer;
+  }
+
+  angular
+      .module('blocJams')
+      .factory('SongPlayer', SongPlayer);
 })();
