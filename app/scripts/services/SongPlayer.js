@@ -1,7 +1,16 @@
 (function() {
   function SongPlayer() {
 
+    /**
+    * @desc SongPlayer object to hold and return relavent data for this service
+    * @type {Object}
+    */
     var SongPlayer = {};
+
+    /**
+    * @desc Object to hold currently playing song
+    * @type {Object}
+    */
     var currentSong = null;
 
     /**
@@ -29,6 +38,11 @@
       currentSong = song;
     };
 
+    /**
+    * @function playSong
+    * @desc private function to play specified song
+    * @param {Object} song
+    */
     var playSong = function(song){
         currentBuzzObject.play();
         song.playing = true;
