@@ -7,6 +7,10 @@
     */
     var SongPlayer = {};
 
+    /**
+    * @desc gets current album from Fixtures.js
+    * @type {Object}
+    */
     var currentAlbum = Fixtures.getAlbum();
 
     /**
@@ -44,6 +48,11 @@
         song.playing = true;
     };
 
+    /**
+    * @function getSongIndex
+    * @desc gets the index of the given song
+    * @param {Object} song
+    */
     var getSongIndex = function(song) {
         return currentAlbum.songs.indexOf(song);
     };
@@ -54,6 +63,11 @@
     */
     SongPlayer.currentSong = null;
 
+    /**
+    * @function SongPlayer.play
+    * @desc method to play specified song
+    * @param {Object} song
+    */
     SongPlayer.play = function(song){
         song = song || SongPlayer.currentSong;
       if(SongPlayer.currentSong !==song){
@@ -61,18 +75,27 @@
         playSong(song);
 
       } else if (SongPlayer.currentSong === song){
-          if (currentBuzzObject.isPaused()){
-            currentBuzzObject.play();
-          }
+        if (currentBuzzObject.isPaused()){
+        currentBuzzObject.play();
+        }
       }
     };
 
+    /**
+    * @function SongPlayer.pause
+    * @desc method to pause specified song
+    * @param {Object} song
+    */
     SongPlayer.pause = function(song){
         song = song || SongPlayer.currentSong;
       currentBuzzObject.pause();
       song.playing = false;
     };
 
+    /**
+    * @function SongPlayer.previous
+    * @desc method to skip back one song
+    */
     SongPlayer.previous = function() {
         var currentSongIndex = getSongIndex(SongPlayer.currentSong);
         currentSongIndex--;
