@@ -1,11 +1,13 @@
 (function() {
-  function SongPlayer() {
+  function SongPlayer(Fixtures) {
 
     /**
     * @desc SongPlayer object to hold and return relavent data for this service
     * @type {Object}
     */
     var SongPlayer = {};
+
+    var currentAlbum = Fixtures.getAlbum();
 
     /**
     * @desc Buzz object audio file
@@ -42,6 +44,10 @@
         song.playing = true;
     };
 
+    var getSongIndex = function(song) {
+        return currentAlbum.songs.indexOf(song);
+    };
+
     /**
     * @desc Object to hold currently playing song
     * @type {Object}
@@ -67,10 +73,24 @@
       song.playing = false;
     };
 
+    SongPlayer.previous = function() {
+        var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+        currentSongIndex--;
+
+        if (currentSongIndex < 0) {
+        currentBuzzObject.stop();
+        SongPlayer.currentSong.playing = null;
+        } else {
+            var song = currentAlbum.songs[currentSongIndex];
+            setSong(song);
+            playSong(song);
+        }
+    };
+
     return SongPlayer;
   }
 
   angular
       .module('blocJams')
-      .factory('SongPlayer', SongPlayer);
+      .factory('SongPlayer', ['Fixtures', SongPlayer]);
 })();
