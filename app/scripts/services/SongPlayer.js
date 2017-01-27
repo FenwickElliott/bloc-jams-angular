@@ -1,5 +1,5 @@
 (function() {
-  function SongPlayer(Fixtures) {
+  function SongPlayer($rootScope, Fixtures) {
 
     /**
     * @desc SongPlayer object to hold and return relavent data for this service
@@ -142,5 +142,5 @@
 
   angular
       .module('blocJams')
-      .factory('SongPlayer', ['Fixtures', SongPlayer]);
+      .factory('SongPlayer', ['$rootScope','Fixtures', SongPlayer]);
 })();
