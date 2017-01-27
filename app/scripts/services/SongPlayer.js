@@ -21,7 +21,7 @@
     var setSong = function(song){
       if(currentBuzzObject){
         currentBuzzObject.stop();
-       SongPlayer.currentSong.Playing = null;
+        SongPlayer.currentSong.Playing = null;
       }
 
       currentBuzzObject = new buzz.sound(song.audioUrl,{
@@ -29,7 +29,7 @@
         preload: true
       });
 
-     SongPlayer.currentSong = song;
+      SongPlayer.currentSong = song;
     };
 
     /**
@@ -41,7 +41,6 @@
         currentBuzzObject.play();
         song.playing = true;
     };
-
 
     /**
     * @desc Object to hold currently playing song
